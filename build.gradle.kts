@@ -16,8 +16,17 @@ buildscript {
 
 task("runAffectedModulesTest") {
 
-    Library.getAffectedModules(rootProject.projectDir).forEach {
+    Library.getAffectedModules(rootProject.projectDir).forEach { affectedModuleName ->
 
-        dependsOn("$it:testDebugUnitTest")
+        val affectedProject = rootProject.subprojects.find { it.name == affectedModuleName }
+
+        val hashAndroidPlugin = affectedProject!!.plugins.hasPlugin("com.android.application")
+                || affectedProject.plugins.hasPlugin("com.android.library")
+
+        when (hashAndroidPlugin) {
+
+            true -> dependsOn("$affectedModuleName:testDebugUnitTest")
+            else -> dependsOn("$affectedModuleName:test")
+        }
     }
 }
