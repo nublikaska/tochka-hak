@@ -13,7 +13,7 @@ import com.nublikaska.myapplication2131213.databinding.FragmentFirstBinding
  */
 class FirstFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = nulladd
+    private var _binding: FragmentFirstBinding? = nulladdфвфвы
 
     // This property is only valid between onCreateView and
     // onDestroyView.
