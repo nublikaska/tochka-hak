@@ -16,7 +16,7 @@ buildscript {
 
 task("runAffectedModulesTest") {
 
-    Library.getAffectedModules(rootProject.projectDir).forEach { affectedModuleName ->
+    Library.getAffectedModules(rootProject.projectDir, rootProject.subprojects).forEach { affectedModuleName ->
 
         val affectedProject = rootProject.subprojects.find { it.name == affectedModuleName }
 

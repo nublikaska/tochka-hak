@@ -1,11 +1,12 @@
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.lib.ObjectId
 import org.eclipse.jgit.treewalk.CanonicalTreeParser
+import org.gradle.api.Project
 import java.io.File
 
 object Library {
 
-    fun getAffectedModules(project: File): Set<String> {
+    fun getAffectedModules(project: File, subprojects: Set<Project>): List<String> {
 
         //println("UUUUUUUU" + project.absolutePath)
 
@@ -13,7 +14,12 @@ object Library {
 
         val diff = git.getDiffLastCommit()
 
-        return diff.mapTo(HashSet()) { it.substringBefore('/') }
+        val affectedRootFiles = diff.mapTo(HashSet()) { it.substringBefore('/') }
+
+        return affectedRootFiles.filter { affectedRootFileName ->
+
+            subprojects.any { subproject -> subproject.name == affectedRootFileName }
+        }
     }
 
     private fun Git.getDiffLastCommit(): List<String> {
