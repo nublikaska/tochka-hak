@@ -8,6 +8,7 @@ import java.io.File
 
 fun main() {
 
+
     val projectPath = File("").absolutePath
 
     val git: Git = Git.open(File(projectPath))
