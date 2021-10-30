@@ -12,7 +12,9 @@ fun main() {
 
     val git: Git = Git.open(File(projectPath))
 
-    git.getDiffLastCommit()
+    val diff = git.getDiffLastCommit()
+
+    val affectedModules = diff.mapTo(HashSet()) { it.substringBefore('/') }
 }
 
 private fun Git.getDiffLastCommit(): List<String> {

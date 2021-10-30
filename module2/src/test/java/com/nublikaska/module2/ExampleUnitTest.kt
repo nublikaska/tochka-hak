@@ -1,4 +1,4 @@
-package com.nublikaska.myapplication2131213
+package com.nublikaska.module2
 
 import org.junit.Test
 
@@ -13,6 +13,6 @@ class ExampleUnitTest {
 
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 1)
+        assertEquals(4, 2 + 2)
     }
 }
